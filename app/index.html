@@ -7,9 +7,45 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
   </head>
-  <body ng-app>
-    <div class="container">
-      <p>{{12 + 24}}</p>
+  <body ng-app='app'>
+    <div class="container" ng-controller='MainController'>
+  
+      <div class="formholder">
+        
+    
+          <form name="forms" ng-model="forms" ng-submit="submit()" novalidate>
+            <label> Name</label>
+            <input class="name input" name="names" ng-model="user.name" type="text" required >
+            
+            <div class="name-invalid error" ng-show="forms.names.$invalid && !forms.names.$pristine">Name cannot be left empty </div>
+            <label> Email</label>
+            <input class="email input" type="email" name="email"  ng-model="user.emails" required>
+             
+             <div class="email_invalid error " ng-show="forms.email.$error.required && forms.email.$dirty "> Email cannot be left empty</div>
+             <div class="email_invalid error " ng-show="forms.email.$error.email ">Please enter a correct email</div>
+            <label> Website</label>            
+            <input class="website input" type="url" name="website" ng-model= "user.website" ng-pattern= "/^https?:\/\//i" >
+             
+             <div class="website-invalid error" ng-show="forms.website.$error.pattern">Website must start with http://</div>
+            <label> Message</label>            
+            <textarea class="message input" type="text" name="message" ng-model="user.messages" rows="5" required></textarea>
+             
+             <div class="name-invalid error" ng-show="forms.message.$error.required && !forms.message.$pristine">Message cannot be left empty
+             </div>
+             <button >Submit</button>
+
+          </form>
+          <h1 class="comment_title">Comments</h1>
+        <div class="comments" ng-repeat=" mes in comments track by $index">
+          <span>{{mes.messages}}</span>
+        
+        </div>
+      </div>
+      <div>
+        
+        
+      </div>
+
     </div>
     <script src="js/bundle.js"></script>
   </body>
